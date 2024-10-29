@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnModoTeste"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modo Teste"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnInserirCredenciais"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inserir Credenciais" />
+
+</LinearLayout>
