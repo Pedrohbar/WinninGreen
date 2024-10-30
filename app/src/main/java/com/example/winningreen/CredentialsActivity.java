@@ -30,21 +30,21 @@ public class CredentialsActivity extends AppCompatActivity {
             String clientId = edtClientId.getText().toString().trim();
             String clientSecret = edtClientSecret.getText().toString().trim();
 
-            Log.d(TAG, "Validando credenciais");
             if (!clientId.isEmpty() && !clientSecret.isEmpty()) {
                 saveCretendials(clientId, clientSecret);
-                checkSetupComplete();
-                generateTokenAndNextScreen();
+
+                //redireciona para TokenGenerationActivity
+                Intent intent = new Intent(CredentialsActivity.this, TokenGenerationActivity.class);
+                startActivity(intent);
+                finish();
             } else {
                 Toast.makeText(this, "Por favor, insira as credenciais.", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "Credenciais vazias");
             }
         });
     }
 
     private void saveCretendials(String clientId, String clientSecret) {
-        Log.d(TAG, "Salvando credenciais no SharedPreferences");
-        // Salvar as credenciais em SharedPreferences
+
         SharedPreferences prefs = getSharedPreferences("arduino_prefs", MODE_PRIVATE);
         prefs.edit()
                 .putString("clientId", clientId)
@@ -52,19 +52,5 @@ public class CredentialsActivity extends AppCompatActivity {
                 .apply();
     }
 
-    private void checkSetupComplete() {
-        Log.d(TAG, "Marcando setup como completo");
-        SharedPreferences prefs = getSharedPreferences("arduino_prefs", MODE_PRIVATE);
-        prefs.edit()
-                .putBoolean("isSetupComplete", true)
-                .apply();
-    }
 
-    private void generateTokenAndNextScreen() {
-        Log.d(TAG, "Gerando token e prosseguindo para TokenGenerationActivity");
-        // Ir para a tela de geração de token e validação das credenciais
-        Intent intent = new Intent(CredentialsActivity.this, TokenGenerationActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }

@@ -52,10 +52,8 @@ public class ArduinoRepository {
 
         String token = getToken();
         if (token == null) {
-            Log.e(TAG, "obterThing: Token não disponível.");
-            throw new IllegalStateException("Token não disponível. Certifique-se de que o token foi gerado e salvo.");
+            throw new IllegalStateException("Token não disponível.");
         }
-        Log.d(TAG, "obterThing: Chamando API para obter Thing ID: " + thingId);
         apiService.getThing(thingId, token, callback);
     }
 
@@ -63,8 +61,7 @@ public class ArduinoRepository {
     public void updatePropertyValue(String thingId, String propertyId, int novoValor, Callback<Void> callback) {
         String token = getToken();
         if (token == null) {
-            Log.e(TAG, "atualizarValorPropriedade: Token não disponível.");
-            throw new IllegalStateException("Token não disponível. Certifique-se de que o token foi gerado e salvo.");
+            throw new IllegalStateException("Token não disponível.");
         }
         Log.d(TAG, "atualizarValorPropriedade: Chamando API para atualizar propriedade " + propertyId + " do Thing " + thingId + " para " + novoValor);
         apiService.updateThingPropertyValue(thingId, propertyId, token, novoValor, callback);

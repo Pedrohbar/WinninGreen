@@ -22,7 +22,6 @@ public class FirstScreenActivity extends AppCompatActivity {
         boolean isSetupComplete = prefs.getBoolean("isSetupComplete", false);
 
         if (isSetupComplete) {
-            Log.d(TAG, "Setup já foi concluído. Redirecionando para DashboardActivity.");
             Intent intent = new Intent(FirstScreenActivity.this, DashboardActivity.class);
             startActivity(intent);
             finish();
@@ -43,23 +42,20 @@ public class FirstScreenActivity extends AppCompatActivity {
             String testClientSecret = "HznQ5iWwQryB4H69EBEAzvnESkV2anWs22X6J9krA5jVtSo7PKdqLfFxncpAstvF";
             String testThingId = "cde81b33-0aa8-419e-90c2-1c51db59dfc4";
 
-            // Salvar as credenciais de teste e o modo de teste em SharedPreferences
+            // Salva credenciais de teste e o modo de teste em SharedPreferences
             prefs.edit()
                     .putString("clientId", testClientId)
                     .putString("clientSecret", testClientSecret)
                     .putString("thingId", testThingId)
                     .putBoolean("isTestMode", true) // Flag para indicar Modo Teste
-                    .putBoolean("isSetupComplete", true) // Marcar setup como completo
                     .apply();
 
-            // Ir para TokenGenerationActivity
             Intent intent = new Intent(FirstScreenActivity.this, TokenGenerationActivity.class);
             startActivity(intent);
             finish();
         });
 
         btnInserirCredenciais.setOnClickListener(v -> {
-            // Ir para CredentialsActivity
             Intent intent = new Intent(FirstScreenActivity.this, CredentialsActivity.class);
             startActivity(intent);
         });

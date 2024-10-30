@@ -14,17 +14,12 @@ public class ThingProperty {
 
     private String type;
 
-    // Getters
     public String getId() {
         return id;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getVariableName() {
-        return variableName;
     }
 
     public String getLastValue() {

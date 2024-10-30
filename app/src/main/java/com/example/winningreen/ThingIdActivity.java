@@ -37,19 +37,18 @@ public class ThingIdActivity extends AppCompatActivity {
             String thingId = edtThingId.getText().toString().trim();
 
             if (!thingId.isEmpty()) {
-                validarThingId(thingId);
+                validateThingId(thingId);
             } else {
                 Toast.makeText(this, "Por favor, insira o Thing ID.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void validarThingId(String thingId) {
+    private void validateThingId(String thingId) {
         arduinoRepository.getThing(thingId, new Callback<ThingResponse>() {
             @Override
             public void onResponse(Call<ThingResponse> call, Response<ThingResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // Thing ID is valid, save and proceed
                     salvarThingId(thingId);
                     Intent intent = new Intent(ThingIdActivity.this, DashboardActivity.class);
                     startActivity(intent);

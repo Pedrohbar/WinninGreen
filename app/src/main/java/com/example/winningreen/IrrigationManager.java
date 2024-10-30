@@ -32,12 +32,10 @@ public class IrrigationManager {
         return sharedPreferences.getBoolean(KEY_IRRIGATION_ENABLED_PREFIX + sensorId, false);
     }
 
-    // Obter a umidade mínima configurada para um sensor específico
     public int getMinHumidity(String sensorId) {
         return sharedPreferences.getInt(KEY_MIN_HUMIDITY_PREFIX + sensorId, 0);
     }
 
-    // Obter a umidade máxima configurada para um sensor específico
     public int getMaxHumidity(String sensorId) {
         return sharedPreferences.getInt(KEY_MAX_HUMIDITY_PREFIX + sensorId, 100);
     }

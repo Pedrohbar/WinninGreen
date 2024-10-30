@@ -12,7 +12,7 @@ public class ThingResponse {
     @SerializedName("properties")
     private List<ThingProperty> properties;
 
-    // Getters
+
     public String getId() {
         return id;
     }

@@ -2,7 +2,6 @@ package com.example.winningreen;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.util.Log;
 
 import com.example.winningreen.api.model.response.TokenResponse;
@@ -17,7 +16,6 @@ public class TokenManager {
     private static TokenManager instance;
     private Context context;
     private ArduinoRepository arduinoRepository;
-    private Handler handler;
 
     // Interface de Callback para notificar o resultado da geração do token
     public interface TokenCallback {
@@ -28,7 +26,6 @@ public class TokenManager {
     private TokenManager(Context context) {
         this.context = context.getApplicationContext(); // Usar Application Context para evitar vazamentos
         this.arduinoRepository = new ArduinoRepository(this.context);
-        this.handler = new Handler();
     }
 
     // Método para obter a instância

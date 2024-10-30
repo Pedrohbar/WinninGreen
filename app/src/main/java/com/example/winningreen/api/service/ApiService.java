@@ -10,23 +10,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class ApiService {
-    private static final String TAG = "ApiService";
     private final ArduinoCloudApiService apiInterface;
 
     public ApiService() {
         this.apiInterface = RetrofitClient.getApiService();
     }
 
-    // Método para gerar o token
     public void generateToken(String clientId, String clientSecret, Callback<TokenResponse> callback) {
         TokenRequest tokenRequest = new TokenRequest(clientId, clientSecret);
         Call<TokenResponse> call = apiInterface.generateToken(tokenRequest);
 
-        // Enfileirar a requisição
         call.enqueue(callback);
     }
 
-    // Método para obter a Thing
     public void getThing(String thingId, String token, Callback<ThingResponse> callback) {
         String acceptHeader = "application/vnd.arduino.thing+json,application/vnd.goa.error+json";
         boolean showProperties = true;
@@ -38,7 +34,6 @@ public class ApiService {
                 showProperties
         );
 
-        // Enfileira request
         call.enqueue(callback);
     }
 
@@ -59,7 +54,6 @@ public class ApiService {
                 value
         );
 
-        // Enfileira request
         call.enqueue(callback);
     }
 }

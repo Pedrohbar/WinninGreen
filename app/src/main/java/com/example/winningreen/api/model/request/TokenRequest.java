@@ -21,18 +21,4 @@ public class TokenRequest {
         this.clientSecret = clientSecret;
     }
 
-    public String getGrantType() {
-        return grantType;
-    }
-
-    public String getClientId() {
-        return clientId;
-    }
-
-    public String getClientSecret() {
-        return clientSecret;
-    }
-    public String getAudiance() {
-        return audiance;
-    }
 }

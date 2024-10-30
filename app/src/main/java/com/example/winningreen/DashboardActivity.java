@@ -64,6 +64,10 @@ public class DashboardActivity extends AppCompatActivity implements SensorAdapte
         sensorAdapter = new SensorAdapter(sensorList, this);
         recyclerViewSensores.setAdapter(sensorAdapter);
 
+        // Carrega Thing ID salvo
+        thingId = getSharedPreferences("arduino_prefs", MODE_PRIVATE)
+                .getString("thingId", null);
+
         //ArduinoRepository
         arduinoRepository = new ArduinoRepository(this);
 
@@ -74,18 +78,16 @@ public class DashboardActivity extends AppCompatActivity implements SensorAdapte
         // Inicialização do IrrigationManager
         irrigationManager = new IrrigationManager(this);
 
-        // Obter o Thing ID salvo
-        thingId = getSharedPreferences("arduino_prefs", MODE_PRIVATE)
-                .getString("thingId", null);
-
         if (thingId != null) {
             getHumiditySensors();
             startMoistureLossSimulator();
+            checkSetupComplete();
         } else {
             Toast.makeText(this, "Thing ID não encontrado.", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
+
     private void renewToken(final Runnable onSuccess) {
         tokenManager.generateToken(new TokenManager.TokenCallback() {
             @Override
@@ -150,7 +152,7 @@ public class DashboardActivity extends AppCompatActivity implements SensorAdapte
             }
         }
 
-        sensorAdapter.notifyDataSetChanged();
+        sensorAdapter.notifyDataSetChanged(); //exibe os sensores
     }
 
     @Override
@@ -195,10 +197,8 @@ public class DashboardActivity extends AppCompatActivity implements SensorAdapte
                 sensor.setDisplayName(newName);
                 saveCustomSensorName(sensor.getId(), newName);
                 sensorAdapter.notifyDataSetChanged();
-                Log.d(TAG, "Nome do sensor atualizado para: " + newName);
             } else {
                 Toast.makeText(this, "Nome inválido. Máximo de 15 caracteres.", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "Nome inválido inserido.");
             }
         });
         builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
@@ -361,6 +361,12 @@ public class DashboardActivity extends AppCompatActivity implements SensorAdapte
         };
         // Iniciar simulação
         simuladorHandler.postDelayed(simuladorRunnable, 5000);
+    }
+    private void checkSetupComplete() {
+        SharedPreferences prefs = getSharedPreferences("arduino_prefs", MODE_PRIVATE);
+        prefs.edit()
+                .putBoolean("isSetupComplete", true)
+                .apply();
     }
 
     @Override

@@ -13,7 +13,7 @@ public class TokenResponse {
     @SerializedName("token_type")
     private String tokenType;
 
-    // Getters
+    
     public String getAccessToken() {
         return accessToken;
     }
